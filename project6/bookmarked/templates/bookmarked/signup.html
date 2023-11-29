@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookmarked/style.css' %}">
+</head>
+
+<body style="background-color:#ffffff;">
+
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="{% url 'index' %}" class="w3-bar-item w3-button"><b>BOOKMARKED</b></a>
+    </div>
+  </div>
+
+<!-- Page content --><div class="login-page">
+  <div class="form">
+    <h1 class="w3-xlarge w3-text-black"><span class="w3-padding"><center><b>Welcome!</b></center></span></h1>
+    <form class="register-form">
+        <input type="text" placeholder="name"/>
+        <input type="text" placeholder="username"/>
+        <input type="text" placeholder="email"/>
+        <input type="password" placeholder="password"/>      
+        <input type="password" placeholder="confirm password"/>
+        <a href="{% url 'homepage' %}"><button><b>Sign up</b></button></a>
+        <p class="message">Already registered? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Recipe</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookmarked/style.css' %}">
+</head>
+
+<body style="background-color:#ffffff;">
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="{% url 'homepage' %}" class="w3-bar-item w3-button"><b>BOOKMARKED</b></a>
+    </div>
+</div>
+
+<!-- Side Navbar content -->
+<div class="wrapper">
+    <div class="sidebar">
+        <!--menu item-->
+        <ul>
+            <li>
+                <br>
+            </li> 
+            <li>
+                <!-- For now this is a placeholder searchbar, but will implement a search feature-->
+                <!-- 
+                    The search feature will parse through the database and show any matches
+                    -> This will include any of the saved recipes the user already has, as well as new possible options
+                -->
+                <input type="text" placeholder="Search.." name="search">
+                <!-- Add a Search button-->
+    
+            </li>
+            <li>
+                <br>
+            </li>
+
+            <li>
+                <a href="{% url 'homepage' %}">
+                    <!--
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                    -->
+                    <span class="item">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'addrecipe' %}"  class="active">
+                <!--
+                    <span class="icon"><i class="fas fa-desktop"></i></span>
+                -->
+                    <span class="item">Add a new recipe</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'shoppinglist' %}">
+                    <!--
+                    <span class="icon"><i class="fas fa-user-friends"></i></span>
+                    -->
+                    <span class="item">Shopping list</span>
+                </a>
+            </li>            
+            <li>
+                <a href="{% url 'index' %}">
+                    <!--
+                    <span class="icon"><i class="fas fa-user-friends"></i></span>
+                    -->
+                    <span class="item">Logout</span>
+                </a>
+            </li>
+        
+        </ul>
+    </div>
+    </div>
+
+    <!-- For now, here are some place holders:-->
+<div class="main">
+    <div class="grid">
+		<div class="col fluid-flex">
+            <h1></h1>
+				<img src="http://placehold.it/1000x500" alt="Image" title="Image" />
+				<center><button><center> Upload Photo</center></h2></button></center>
+		</div>
+
+		<div class="col fluid-flex">
+            <h1></h1>
+            <form class="addrecipe-form">
+            <ul>
+                <li>
+                    <h3>Recipe Name</h3>
+                    <input type="text" placeholder="ex: Lemon Pasta"/>
+                </li>
+                
+                <li>
+                    <h3>Tags</h3>
+                    <input type="text" placeholder="ex: easy, dinner ..."/>
+                </li>
+
+                <li>
+                    <h3>Ingredients</h3>
+                    <textarea id="ing" name="ing" rows="4" cols="50" placeholder="Enter Ingredients Here:"></textarea>
+                </li>  
+            </form>
+            </ul>
+
+		</div>
+
+    </div>
+
+    <h3>Directions</h3>
+    <textarea id="ing" name="ing" rows="15" cols="150" placeholder="Enter Directions Here:"></textarea>
+
+</body>
+
+</html>
+

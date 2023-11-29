@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookmarked/style.css' %}">
+</head>
+
+<body style="background-color:#ffffff;">
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="{% url 'homepage' %}" class="w3-bar-item w3-button"><b>BOOKMARKED</b></a>
+    </div>
+</div>
+
+<!-- Side Navbar content -->
+<div class="wrapper">
+    <div class="sidebar">
+        <!--menu item-->
+        <ul>
+            <li>
+                <br>
+            </li> 
+            <li>
+                <!-- For now this is a placeholder searchbar, but will implement a search feature-->
+                <!-- 
+                    The search feature will parse through the database and show any matches
+                    -> This will include any of the saved recipes the user already has, as well as new possible options
+                -->
+                <input type="text" placeholder="Search.." name="search">
+                <!-- Add a Search button-->
+    
+            </li>
+            <li>
+                <br>
+            </li>
+
+            <li>
+                <a href="{% url 'homepage' %}" class="active">
+                    <!--
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                    -->
+                    <span class="item">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'addrecipe' %}">
+                <!--
+                    <span class="icon"><i class="fas fa-desktop"></i></span>
+                -->
+                    <span class="item">Add a new recipe</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'shoppinglist' %}">
+                    <!--
+                    <span class="icon"><i class="fas fa-user-friends"></i></span>
+                    -->
+                    <span class="item">Shopping list</span>
+                </a>
+            </li>            
+            <li>
+                <a href="{% url 'index' %}">
+                    <!--
+                    <span class="icon"><i class="fas fa-user-friends"></i></span>
+                    -->
+                    <span class="item">Logout</span>
+                </a>
+            </li>
+        
+        </ul>
+    </div>
+    </div>
+
+    <!--
+        Here we will have the database linked to show recipes that the user has added
+
+        Each recipe will show up in a container to reflect what can be seen in the figma and will contain:
+        1. A (optional) picture of the recipe
+        2. The title of the recipe
+        3. Any tags the recipe has
+    -->
+
+    <!-- For now, here are some place holders:-->
+    <div class="main">
+    <div class="grid">
+		<div class="col fluid-flex">
+            <h1></h1>
+				<img src="http://placehold.it/1000x500" alt="Image" title="Image" />
+				<h2> Recipe 1</h2>
+				<p><a href="javascript:window.location.href=window.location.href" class="more">&plus; More</a></p>
+		
+                <h1></h1>
+				<img src="http://placehold.it/1000x500" alt="Image" title="Image" />
+				<h2> Recipe 4</h2>
+				<p><a href="javascript:window.location.href=window.location.href" class="more">&plus; More</a></p>
+        </div>
+		<div class="col fluid-flex">
+            <h1></h1>
+				<img src="http://placehold.it/1000x500" alt="Image" title="Image" />
+				<h2> Recipe 2</h2>
+				<p><a href="javascript:window.location.href=window.location.href" class="more">&plus; More</a></p>
+		</div>
+		<div class="col fluid-flex">
+            <h1></h1>
+				<img src="http://placehold.it/1000x500" alt="Image" title="Image" />
+				<h2> Recipe 3</h2>
+				<p><a href="javascript:window.location.href=window.location.href" class="more">&plus; More</a></p>
+		</div>
+
+    </div>
+
+</body>
+
+</html>
+

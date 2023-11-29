@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bookmarked</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookmarked/style.css' %}">
+</head>
+
+<body style="background-color:#B05044;">
+
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+    <div class="w3-display-middle w3-margin-top w3-center">
+        <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding"><b>B O O K M A R K E D</b></span></h1>
+        <p class="w3-text-white"><span class="w3-padding"><b>All your recipes in one place</b></p></span>
+        <div class="btn">
+            <a href="{% url 'signup' %}"><button id="first" class="both">Sign Up</button></a>
+            <a href="{% url 'login' %}"><button id="second" class="both">Login</button></a>
+          </div>
+    </div>
+</div>
+
+</body>
+
+</html>
