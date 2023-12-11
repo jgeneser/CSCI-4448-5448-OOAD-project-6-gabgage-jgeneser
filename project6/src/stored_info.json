@@ -13,6 +13,13 @@
       "full_name": "User Two",
       "password": "hashed_password",
       "recipes": []
+    },
+    {
+      "username": "ella",
+      "email": "al",
+      "full_name": "notella",
+      "password": "test",
+      "recipes": []
     }
   ]
 }

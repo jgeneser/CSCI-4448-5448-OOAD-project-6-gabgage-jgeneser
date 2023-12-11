@@ -18,4 +18,4 @@ class Driver:
         print("Welcome to the BookMarked!")
         Driver.importUsers()
         user = prompt_and_create_user()
-        
+        return user

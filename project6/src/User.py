@@ -30,10 +30,11 @@ def prompt_and_create_user():
         #prompt the user to enter their email or username
         user_identification = input("Enter your username or email: ")
         # Check if the user already exists
-        existing_user = next((user for user in User.active_users if user.email == user_identification or user.username == user_identification), None)
+        for user in User.active_users:
+            if user.email == user_identification or user.username == user_identification:
+                print(user.username)
+                return exsiting_user_login(user)
         # if the user already exists, pass the exisiting user to the login function
-        if existing_user:
-            return exsiting_user_login(existing_user)
         else:
             return create_new_user()
             
@@ -53,7 +54,7 @@ def exsiting_user_login(existing_user):
 def create_new_user():
     # Asks if they want to create a new user since they dont already have an account
     create_new_user = input("Username or email not found. Do you want to create a new user? (yes/no): ").lower()
-    if create_new_user == 'yes':
+    if create_new_user == 'yes' or 'y':
         # if they want to create an account -> get all of their information inorder to create a new user
         while True: 
             full_name = input("Enter your full name: ")
@@ -94,4 +95,3 @@ def format_new_user(email, username, password, full_name):
         "password": password,
         "recipes": []
     }
-
