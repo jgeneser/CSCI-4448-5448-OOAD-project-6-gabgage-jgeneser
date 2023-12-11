@@ -12,7 +12,7 @@
       "email": "user2@example.com",
       "full_name": "User Two",
       "password": "hashed_password",
-      "recipes": ["recipe3", "recipe4"]
+      "recipes": []
     }
   ]
 }

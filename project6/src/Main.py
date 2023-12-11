@@ -1,22 +1,16 @@
 # GameEngine.py
+
+from Driver import Driver
 from User import User, prompt_and_create_user
 from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
 
-import json
-import os
-def importUsers():
-    file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
-    with open(file_path, "r") as file:
-        data = json.load(file)
-    users = data["users"]
-    for user in users:
-        User(user['email'], user['password'], user['username'], user['full_name'])
+# This function imports all of the users from the stored_info.json file and makes them all users
+
 
 
 def main():
-    print("Welcome to the BookMarked!")
-    importUsers()
-    user = prompt_and_create_user()
+    driver = Driver()
+    driver.intalize()
 
     while True:
         print("\nOptions:")
@@ -29,7 +23,6 @@ def main():
         if choice == '1':
             print()
             if not user.recipes:
-                
                 print("No recipes found on your account!")
             else:
                 user.display_current_recipes()
