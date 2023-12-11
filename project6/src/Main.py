@@ -2,16 +2,27 @@
 from User import User, prompt_and_create_user
 from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
 
+import json
+import os
+def importUsers():
+    file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
+    with open(file_path, "r") as file:
+        data = json.load(file)
+    users = data["users"]
+    for user in users:
+        User(user['email'], user['password'], user['username'], user['full_name'])
+
+
 def main():
     print("Welcome to the BookMarked!")
-
+    importUsers()
     user = prompt_and_create_user()
 
     while True:
         print("\nOptions:")
         print("1. View previous recipes")
         print("2. Create a new recipe")
-        print("3. Exit")
+        print("3. Sign out")
 
         choice = input("Enter your choice: ")
 
@@ -52,11 +63,15 @@ def main():
             print("Recipe added successfully!")
 
         elif choice == '3':
-            print("Exiting. Goodbye!")
-            break
+            print("Welcome to the BookMarked!")
+            user = prompt_and_create_user()
 
         else:
             print("Invalid choice. Please try again")
+            
 
 if __name__ == "__main__":
     main()
+
+
+
