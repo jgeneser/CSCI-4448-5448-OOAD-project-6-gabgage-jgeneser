@@ -1,4 +1,7 @@
 #User.py
+import os  
+import json 
+
 class User:
     active_users = []
     def __init__(self, email, password, username, full_name):
@@ -49,6 +52,7 @@ def prompt_and_create_user():
                     confirm_password = input("Confirm password: ")
                     if (user_password == confirm_password):
                         new_user = User(user_email, user_password, username, full_name)
+                        add_user_to_json(user_email, username, user_password, full_name)
                         print("New user {} created!".format(user_email))
                         return new_user  # Return the newly created user
                     else:
@@ -56,8 +60,26 @@ def prompt_and_create_user():
             else:
                 print("Login canceled. Goodbye!")
                 return None
-            
 
+def add_user_to_json(email, username, password, full_name):
+    file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
+    with open(file_path, "r") as file:
+        data = json.load(file)
+    #add new user
+    new_user = format_new_user(email, username, password, full_name)
+    data["users"].append(new_user)
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=2)
+
+
+def format_new_user(email, username, password, full_name):
+    return {
+        "username": username,
+        "email": email,
+        "full_name": full_name,
+        "password": password,
+        "recipes": []
+    }
 # Example usage:
 # prompt_and_create_user()
 # print("Second creation to check exisiting user")
