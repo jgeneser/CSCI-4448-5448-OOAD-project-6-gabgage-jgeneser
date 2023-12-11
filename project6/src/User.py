@@ -32,7 +32,6 @@ def prompt_and_create_user():
         # Check if the user already exists
         for user in User.active_users:
             if user.email == user_identification or user.username == user_identification:
-                print(user.username)
                 return exsiting_user_login(user)
         # if the user already exists, pass the exisiting user to the login function
         else:

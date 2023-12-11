@@ -20,6 +20,13 @@
       "full_name": "notella",
       "password": "test",
       "recipes": []
+    },
+    {
+      "username": "work",
+      "email": "test",
+      "full_name": "I hope this works",
+      "password": "test",
+      "recipes": []
     }
   ]
 }

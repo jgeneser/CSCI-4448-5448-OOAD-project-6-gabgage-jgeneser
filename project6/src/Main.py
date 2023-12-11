@@ -11,7 +11,7 @@ from Recipe import Recipe, create_recipe, display_recipe  # Import the display_r
 def main():
     driver = Driver()
     user = driver.intalize()
-    print(user.username)
+
     while True:
         print("\nOptions:")
         print("1. View previous recipes")
