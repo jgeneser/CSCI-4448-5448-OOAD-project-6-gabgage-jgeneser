@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "username": "jgeneser",
+      "email": "juge5499@colorado.edu",
+      "full_name": "Jules Geneser",
+      "password": "Jules",
+      "recipes": []
+    },
+    {
+      "username": "user2",
+      "email": "user2@example.com",
+      "full_name": "User Two",
+      "password": "hashed_password",
+      "recipes": ["recipe3", "recipe4"]
+    }
+  ]
+}
