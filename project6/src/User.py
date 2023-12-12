@@ -1,4 +1,4 @@
-#User.py
+from RecipeOrganizer import RecipeOrganizer
 import os  
 import json 
 

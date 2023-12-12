@@ -4,18 +4,23 @@ from Driver import Driver
 from User import User, prompt_and_create_user
 from Recipe import Recipe, create_recipe, display_recipe, delete_recipe  # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
-
+from RecipeOrganizer import RecipeOrganizer
 # This function imports all of the users from the stored_info.json file and makes them all users
 
 def main():
     driver = Driver()
     user = driver.intalize()
 
+
+    #OBSERVER PATTERN
     manager = RecipeManager()
     # Create observers
     recipe_observer = RecipePrinter()
     # Add observers to the manager
     manager.add_observer(recipe_observer)
+
+    #SINGLETON PATTERN
+    recipe_organizer = RecipeOrganizer()
 
 
 
@@ -34,14 +39,19 @@ def main():
             else:
                 user.display_current_recipes()
                 recipe_number = int(input("Enter the number of the recipe to view: "))
-                if 1 <= recipe_number <= len(user.recipes):
-                    selected_recipe = user.recipes[recipe_number - 1]
+                if 1 <= recipe_number <= len(recipe_organizer.recipes):
+                    selected_recipe = recipe_organizer.recipes[recipe_number - 1]
                     print(f"Recipe: {selected_recipe.title}")
                     display_recipe(selected_recipe)
                     delete = input("Would you like to delete this recipe (yes/no): ")
 
                     #To delete a recipe
                     if delete == "yes" or delete == "y":
+                        # remove from Singleton organizer
+                        recipe_organizer.remove_recipe(selected_recipe)
+                        recipe_organizer.sort_recipes()
+                        recipe_organizer.print_recipes()
+                        
                         # Notify Observer
                         manager.update_recipe(selected_recipe.title)
 
@@ -72,8 +82,16 @@ def main():
             new_recipe = create_recipe()
             user.add_recipe(new_recipe)
 
+            # Add to singleton organizer
+            recipe_organizer.add_recipe(new_recipe)
+
             # Notify Observer
             manager.update_recipe(new_recipe.title)
+
+            #Print sorted list via singleotn organizer
+            recipe_organizer.sort_recipes()
+            recipe_organizer.print_recipes()
+
 
         elif choice == '3':
             print("Welcome to the BookMarked!")
