@@ -3,18 +3,24 @@
 from Driver import Driver
 from User import User, prompt_and_create_user
 from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
+from Observer import RecipeObserver, RecipeManager, RecipePrinter
 
 # This function imports all of the users from the stored_info.json file and makes them all users
-
-
 
 def main():
     driver = Driver()
     user = driver.intalize()
 
+    manager = RecipeManager()
+    # Create observers
+    add_recipe_observer = RecipePrinter()
+    # Add observers to the manager
+    manager.add_observer(add_recipe_observer)
+
+
     while True:
         print("\nOptions:")
-        print("1. View previous recipes")
+        print("1. View your saved recipes")
         print("2. Create a new recipe")
         print("3. Sign out")
 
@@ -31,6 +37,8 @@ def main():
                     selected_recipe = user.recipes[recipe_number - 1]
                     print(f"Recipe: {selected_recipe.title}")
                     display_recipe(selected_recipe)
+
+
                     # print("1. View Recipe")
                     # print("2. Exit")
                     # inner_choice = input("Enter your choice: ")
@@ -53,7 +61,12 @@ def main():
             print()
             new_recipe = create_recipe()
             user.add_recipe(new_recipe)
+            
+            print()
             print("Recipe added successfully!")
+
+            # Notify Observer
+            manager.add_recipe(new_recipe.title)
 
         elif choice == '3':
             print("Welcome to the BookMarked!")

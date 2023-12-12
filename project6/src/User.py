@@ -94,3 +94,5 @@ def format_new_user(email, username, password, full_name):
         "password": password,
         "recipes": []
     }
+
+

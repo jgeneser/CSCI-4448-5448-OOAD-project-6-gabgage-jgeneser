@@ -1,3 +1,4 @@
+
 recipeList = []
 
 class Recipe:
@@ -47,7 +48,8 @@ def create_recipe():
     # Get ingredients
     ingredients = get_ingredients()
     instructions = get_instructions()
-    recipeList.append(Recipe(title=title, category=category, ingredients=ingredients, instructions=instructions))
+    recipeList.append(Recipe(title=title, category=category, ingredients=ingredients, instructions=instructions)) 
+
     return Recipe(title=title, category=category, ingredients=ingredients, instructions=instructions)
 
 #display the recipe
@@ -65,5 +67,6 @@ def display_recipe(recipe):
         print("    -", step)
     print("\n")
 
+  
 # create_recipe()
 # display_recipes(recipeList)
