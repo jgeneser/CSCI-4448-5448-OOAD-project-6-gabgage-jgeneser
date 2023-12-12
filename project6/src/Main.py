@@ -61,9 +61,6 @@ def main():
             print()
             new_recipe = create_recipe()
             user.add_recipe(new_recipe)
-            
-            print()
-            print("Recipe added successfully!")
 
             # Notify Observer
             manager.add_recipe(new_recipe.title)

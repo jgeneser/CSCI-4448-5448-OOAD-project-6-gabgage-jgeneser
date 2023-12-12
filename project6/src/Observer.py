@@ -13,6 +13,8 @@ class RecipeObserver():
 class RecipePrinter(RecipeObserver):
     def update(self, recipe):
         print()
+        print("Recipe added successfully!")
+        print()
         print("==== " + recipe + " ====")
         print("Can now be viewed in 'Saved Recipes'")
 
