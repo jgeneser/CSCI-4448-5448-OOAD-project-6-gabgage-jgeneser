@@ -67,6 +67,11 @@ def display_recipe(recipe):
         print("    -", step)
     print("\n")
 
+def delete_recipe(recipe, user_recipes):
+    for rec in user_recipes:
+        if rec.title == recipe.title:
+            user_recipes.remove(recipe)
+            return
   
 # create_recipe()
 # display_recipes(recipeList)

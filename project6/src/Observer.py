@@ -10,10 +10,10 @@ class RecipeObserver():
 class RecipePrinter(RecipeObserver):
     def update(self, recipe):
         print()
-        print("Recipe added successfully!")
+        print("Recipe Updated!")
         print()
         print("==== " + recipe + " ====")
-        print("Can now be viewed in 'Saved Recipes'")
+
 
 
 # Subject
@@ -32,5 +32,6 @@ class RecipeManager:
         for observer in self._observers:
             observer.update(recipe)
 
-    def add_recipe(self, recipe):
+    def update_recipe(self, recipe):
         self.notify_observers(recipe)
+

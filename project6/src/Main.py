@@ -2,7 +2,7 @@
 
 from Driver import Driver
 from User import User, prompt_and_create_user
-from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
+from Recipe import Recipe, create_recipe, display_recipe, delete_recipe  # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 
 # This function imports all of the users from the stored_info.json file and makes them all users
@@ -13,9 +13,10 @@ def main():
 
     manager = RecipeManager()
     # Create observers
-    add_recipe_observer = RecipePrinter()
+    recipe_observer = RecipePrinter()
     # Add observers to the manager
-    manager.add_observer(add_recipe_observer)
+    manager.add_observer(recipe_observer)
+
 
 
     while True:
@@ -37,6 +38,15 @@ def main():
                     selected_recipe = user.recipes[recipe_number - 1]
                     print(f"Recipe: {selected_recipe.title}")
                     display_recipe(selected_recipe)
+                    delete = input("Would you like to delete this recipe (yes/no): ")
+
+                    #To delete a recipe
+                    if delete == "yes" or delete == "y":
+                        # Notify Observer
+                        manager.update_recipe(selected_recipe.title)
+
+                        delete_recipe(selected_recipe, user.recipes)
+                    
 
 
                     # print("1. View Recipe")
@@ -63,7 +73,7 @@ def main():
             user.add_recipe(new_recipe)
 
             # Notify Observer
-            manager.add_recipe(new_recipe.title)
+            manager.update_recipe(new_recipe.title)
 
         elif choice == '3':
             print("Welcome to the BookMarked!")
