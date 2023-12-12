@@ -1,8 +1,5 @@
 from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
 
-    #def remove_recipe(self, recipe):
-
-
 # Observer interface
 class RecipeObserver():
     def update(self, recipe):
