@@ -1,4 +1,5 @@
 from RecipeOrganizer import RecipeOrganizer
+from Recipe import Recipe, Ingredient, Instructions
 import os  
 import json 
 
@@ -23,6 +24,42 @@ class User:
         for i, recipe in enumerate(self.recipes, start=1):
             print(f"{i}. {recipe.title}")
         print()
+
+    # Get user input for ingredients
+    def get_ingredients():
+        ingredients = []
+        while True:
+            ingredient_name = input("Enter an ingredient (or 'done' to finish): ").strip()
+            if ingredient_name.lower() == 'done':
+                break
+            ingredient = Ingredient(name=ingredient_name)
+            ingredients.append(ingredient)
+        return ingredients
+
+    # Get user input for instructions
+    def get_instructions():
+        cook_time = input("Enter the cook time for instructions: ")
+        temperature = input("Enter the cooking temperature: ")
+        directions = []
+        while True:
+            step = input("Enter the cooking step (or 'done' to finish): ").strip()
+            if step.lower() == 'done':
+                break
+            directions.append(step)
+        return Instructions(cook_time=cook_time, temperature=temperature, directions=directions)
+
+    # Get user input for a recipe
+    def create_recipe(self):
+        title = input("Enter the recipe title: ")
+        category = input("Enter the recipe category: ")
+        recipe_type = input("Enter the recipe type (standard/dessert/soup/drink/meal): ")
+        # Get ingredients
+        ingredients = User.get_ingredients()
+        instructions = User.get_instructions()
+        self.recipes.append(Recipe(title=title, category=category, ingredients=ingredients, instructions=instructions)) 
+
+        return Recipe(title=title, category=category, ingredients=ingredients, instructions=instructions)
+
 
 # This function prompts the creation or login of a user and returns a User object
 def prompt_and_create_user():

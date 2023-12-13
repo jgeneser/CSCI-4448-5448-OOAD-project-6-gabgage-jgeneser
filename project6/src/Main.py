@@ -2,7 +2,7 @@
 
 from Driver import Driver
 from User import User, prompt_and_create_user, add_recipe_to_json
-from Recipe import Recipe, create_recipe, display_recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
+from Recipe import Recipe, display_recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
 # This function imports all of the users from the stored_info.json file and makes them all users
@@ -10,7 +10,6 @@ from RecipeOrganizer import RecipeOrganizer
 def main():
     driver = Driver()
     user = driver.intalize()
-
 
     #OBSERVER PATTERN
     manager = RecipeManager()
@@ -79,7 +78,7 @@ def main():
 
         elif choice == '2':
             print()
-            new_recipe = create_recipe()
+            new_recipe = user.create_recipe()
             user.add_recipe(new_recipe)
 
             #Add recipe to JSON

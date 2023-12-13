@@ -1,4 +1,4 @@
-from Recipe import Recipe, create_recipe, display_recipe  # Import the display_recipes function
+from Recipe import Recipe  # Import the display_recipes function
 
 # Observer interface
 class RecipeObserver():
