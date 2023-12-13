@@ -1,5 +1,7 @@
+
 import os
 import json
+
 
 recipeList = []
 
@@ -44,10 +46,10 @@ class Recipe:
         }
 
     
-    def update_recipe(self):
+    def update_recipe(self, user):
         print()
-        # old_recipe = Recipe(self.title, self.category, self.ingredients, self.instructions)
-        while True:
+        loop = True
+        while loop == True:
             print("Which section would you like to update: ")
             print("1. Title")
             print("2. Category")
@@ -87,8 +89,9 @@ class Recipe:
                 self.instructions.directions = new_directions
             continue_to_edit = input("Would you like to continue to edit this recipe? (yes/no): ").lower()
             if continue_to_edit == 'no' or 'n':
-                return False
-        
+                loop = False
+
+        return self
 
 
 class Instructions:

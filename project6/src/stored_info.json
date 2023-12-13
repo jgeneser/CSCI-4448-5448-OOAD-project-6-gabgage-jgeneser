@@ -34,28 +34,21 @@
           ]
         },
         {
-          "title": "Pizza",
-          "type": "meal",
-          "catergory": "Dinner",
+          "title": "Pasta",
+          "type": "standard",
+          "catergory": "dinner",
           "ingredients": [
-            "A frozen pizza"
+            "pasta",
+            "water"
           ],
-          "cook_time": "45 mins",
-          "temperature": "375",
+          "cook_time": "30",
+          "temperature": "stove",
           "directions": [
-            "Put pizza in oven",
-            "Wait 45 mins",
-            "Eat it"
+            "boil water",
+            "make pasta"
           ]
         }
       ]
-    },
-    {
-      "username": "d",
-      "email": "d",
-      "full_name": "d",
-      "password": "d",
-      "recipes": []
     }
   ]
 }

@@ -63,8 +63,7 @@ class User:
         ingredients = User.get_ingredients()
         instructions = User.get_instructions(recipe_type)
         new_recipe = recipeFactory.create_recipe_types(recipe_type, title=title, category=category, ingredients=ingredients, instructions=instructions)
-        new_recipe_json = new_recipe.format_new_recipe()
-        self.add_recipe_to_json(new_recipe_json)
+        self.add_recipe_to_json(new_recipe)
         self.add_recipe(new_recipe)
         # self.recipes.append(new_recipe)
         return new_recipe
@@ -75,11 +74,10 @@ class User:
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
             data = json.load(file)
-        print("Searching through users")
         for user in data['users']:
             if user['username'] == self.username:
-                print("Found a matching username!")
-                user['recipes'].append(recipe)
+                new_recipe_json = recipe.format_new_recipe()
+                user['recipes'].append(new_recipe_json)
         with open(file_path, 'w') as file:
             json.dump(data, file, indent=2)
     

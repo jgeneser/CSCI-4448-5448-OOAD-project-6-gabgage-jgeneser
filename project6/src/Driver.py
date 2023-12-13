@@ -227,6 +227,7 @@ class Driver:
                 if choice == '3': 
                     # Remove from Singleton organizer
                     recipe_organizer.remove_recipe(selected_recipe)
+                    user.recipes.remove(selected_recipe)
                     recipe_organizer.sort_recipes()
                     recipe_organizer.print_recipes()
                     
@@ -238,4 +239,15 @@ class Driver:
 
                 if choice == '4':
                     print("You have selected to update your recipe")
-                    selected_recipe.update_recipe()
+                    user.remove_recipe_from_json(selected_recipe, user.username)
+                    user.recipes.remove(selected_recipe)
+                    
+                    updated_recipe = selected_recipe.update_recipe(user)
+
+                    recipe_organizer.remove_recipe(selected_recipe)
+                    recipe_organizer.sort_recipes()
+
+                    user.add_recipe_to_json(updated_recipe)
+                    recipe_organizer.add_recipe(updated_recipe)
+                    user.recipes.append(updated_recipe)
+                    recipe_organizer.sort_recipes()
