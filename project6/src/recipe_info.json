@@ -90,6 +90,69 @@
       "directions": [
         "cook it"
       ]
+    },
+    {
+      "title": "Bugs Bunny",
+      "catergory": "idek",
+      "ingredients": [
+        "h"
+      ],
+      "cook_time": "10 min",
+      "temperature": "none",
+      "directions": [
+        "do something",
+        "idek",
+        "cool"
+      ]
+    },
+    {
+      "title": "IDEK",
+      "catergory": "kms",
+      "ingredients": [
+        "idk"
+      ],
+      "cook_time": "30",
+      "temperature": "56",
+      "directions": [
+        "cook"
+      ]
+    },
+    {
+      "title": "Fish",
+      "catergory": "gross",
+      "ingredients": [
+        "fish",
+        "oil"
+      ],
+      "cook_time": "13",
+      "temperature": "57",
+      "directions": [
+        "cook it"
+      ]
+    },
+    {
+      "title": "Test",
+      "catergory": "test",
+      "ingredients": [
+        "test"
+      ],
+      "cook_time": "test",
+      "temperature": "test",
+      "directions": [
+        "test"
+      ]
+    },
+    {
+      "title": "Test2",
+      "catergory": "Test",
+      "ingredients": [
+        "test"
+      ],
+      "cook_time": "test",
+      "temperature": "test",
+      "directions": [
+        "test"
+      ]
     }
   ]
 }

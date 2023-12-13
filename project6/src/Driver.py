@@ -180,23 +180,25 @@ class Driver:
                 selected_recipe.display_recipe()
 
                 # For the Decorator Pattern:
-                comment = input("Would you like to leave a comment for this recipe (yes/no): ")
-                if comment == "yes" or comment == "y":
+                print("Would you like to do any of the following to your recipe:")
+                print("1. Leave a comment")
+                print("2. Leave a Review")
+                print("3. Delete the Recipe")
+                print("4. Edit the Recipe")
+                print("5. Exit")
+                choice = input("Enter numerical choice: ")
+                print(choice)
+                if choice == '1':
                     RecipeDecorator(selected_recipe)
                     input_comment = input("Please type your comment: ")
                     decorated_recipe = CommentDecorator(selected_recipe, input_comment)
                     decorated_recipe.display(input_comment)
-
-                review = input("Would you like to leave a review for this recipe (yes/no): ")
-                if review == "yes" or review == "y":
+                if choice == '2':
                     RecipeDecorator(selected_recipe)
                     input_review = input("Please type your review: ")
                     decorated_recipe = ReviewDecorator(selected_recipe, input_review)
                     decorated_recipe.display(input_review)
-
-                #To delete a recipe
-                delete = input("Would you like to delete this recipe (yes/no): ")
-                if delete == "yes" or delete == "y":
+                if choice == '3': 
                     # remove from Singleton organizer
                     recipe_organizer.remove_recipe(selected_recipe)
                     recipe_organizer.sort_recipes()
@@ -206,3 +208,6 @@ class Driver:
                     manager.update_recipe(selected_recipe.title)
 
                     delete_recipe(selected_recipe, user.recipes)
+                if choice == '4':
+                    print("You have selected to update your recipe")
+                    selected_recipe.update_recipe()
