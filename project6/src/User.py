@@ -43,6 +43,7 @@ def exsiting_user_login(existing_user):
     user_password = input("Enter your password: ")
     # Check if the entered password matches the existing user's password
     if user_password == existing_user.password:
+        print()
         print("Welcome back, {}!".format(existing_user.full_name))
         return existing_user  # Return the logged-in user
     else:

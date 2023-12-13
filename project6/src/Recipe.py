@@ -1,5 +1,8 @@
+import os
+import json
 
 recipeList = []
+
 
 class Recipe:
     def __init__(self, title, category, ingredients, instructions):
@@ -75,3 +78,30 @@ def delete_recipe(recipe, user_recipes):
   
 # create_recipe()
 # display_recipes(recipeList)
+
+def format_new_recipe(recipe):
+    ings = []
+
+    for intredient in recipe.ingredients:
+        ings.append(intredient.name)
+
+    return {
+        "title": recipe.title,
+        "catergory": recipe.category,
+        "ingredients": ings,
+        "cook_time": recipe.instructions.cook_time,
+        "temperature": recipe.instructions.temperature,
+        "directions": recipe.instructions.directions
+    }
+
+
+def add_recipe_info_to_json(recipe):
+    file_path = os.path.join(os.path.dirname(__file__), "recipe_info.json")
+    with open(file_path, "r") as file:
+        data = json.load(file)
+    #add new user
+    new_recipe = format_new_recipe(recipe)
+    data["recipes"].append(new_recipe)
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=2)
+
