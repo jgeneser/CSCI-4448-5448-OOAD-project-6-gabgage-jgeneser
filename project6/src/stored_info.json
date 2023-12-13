@@ -19,7 +19,21 @@
       "email": "test",
       "full_name": "Ella Gage",
       "password": "test",
-      "recipes": []
+      "recipes": [
+        {
+          "title": "Bread",
+          "type": "standard",
+          "catergory": "Snack",
+          "ingredients": [
+            "Some bread"
+          ],
+          "cook_time": "5 mins",
+          "temperature": "n/a",
+          "directions": [
+            "eat the bread"
+          ]
+        }
+      ]
     }
   ]
 }

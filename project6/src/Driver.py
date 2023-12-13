@@ -28,6 +28,7 @@ class Driver:
                 print("we matched")
     
     def intalize(self):
+        print()
         print("Welcome to the BookMarked!")
         Driver.importUsers()
         user = Driver.prompt_and_create_user()
@@ -195,11 +196,13 @@ class Driver:
                     RecipeDecorator(selected_recipe)
                     input_comment = input("Please type your comment: ")
                     decorated_recipe = CommentDecorator(selected_recipe, input_comment)
+                    print()
                     decorated_recipe.display(input_comment)
                 if choice == '2':
                     RecipeDecorator(selected_recipe)
                     input_review = input("Please type your review: ")
                     decorated_recipe = ReviewDecorator(selected_recipe, input_review)
+                    print()
                     decorated_recipe.display(input_review)
                 if choice == '3': 
                     # remove from Singleton organizer
