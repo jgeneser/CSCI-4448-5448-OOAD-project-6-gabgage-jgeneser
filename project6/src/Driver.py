@@ -4,8 +4,6 @@ from User import User
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
 from RecipeDecorator import RecipeDecorator, CommentDecorator, ReviewDecorator
-from RecipeFactory import RecipeFactory
-from Recipe import Recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
 
 
 class Driver:
@@ -19,6 +17,15 @@ class Driver:
         users = data["users"]
         for user in users:
             User(user['email'], user['password'], user['username'], user['full_name'])
+
+    # import the previous recipes 
+    def importRecipes(user):
+        file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
+        with open(file_path, "r") as file:
+            data = json.load(file)
+        for user in data['users']:
+            if user['username'] == user.username:
+                print("we matched")
     
     def intalize(self):
         print("Welcome to the BookMarked!")
@@ -78,6 +85,7 @@ class Driver:
             return None
 
 
+    # url reference: https://medium.com/@KaranDahiya2000/modify-json-fields-using-python-1b2d88d16908
     def add_user_to_json(email, username, password, full_name):
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
@@ -150,17 +158,12 @@ class Driver:
     def createNewRecipe(user, recipe_organizer, manager):
         print()
         new_recipe = user.create_recipe()
-        user.add_recipe(new_recipe)
-
-        #Add recipe to JSON
-        Driver.add_recipe_to_json(user.username, new_recipe.title)
-        add_recipe_info_to_json(new_recipe)
 
         # Add to singleton organizer
         recipe_organizer.add_recipe(new_recipe)
 
         # Notify Observer
-        manager.update_recipe(new_recipe.title)
+        manager.update_recipe(new_recipe['title'])
 
         #Print sorted list via singleotn organizer
         recipe_organizer.sort_recipes()
@@ -207,7 +210,9 @@ class Driver:
                     # Notify Observer
                     manager.update_recipe(selected_recipe.title)
 
-                    delete_recipe(selected_recipe, user.recipes)
+                    # Delete the recipe
+                    user.remove_recipe_from_json(selected_recipe)
+
                 if choice == '4':
                     print("You have selected to update your recipe")
                     selected_recipe.update_recipe()

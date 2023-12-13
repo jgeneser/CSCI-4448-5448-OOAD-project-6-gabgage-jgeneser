@@ -6,18 +6,19 @@
       "full_name": "Jules Geneser",
       "password": "Jules",
       "recipes": [
-        "Rebull",
-        "Noodles",
-        "Burgers",
-        "Noods",
-        "Noods",
-        "Noodles",
-        "Good Stuff",
-        "Bugs Bunny",
-        "IDEK",
-        "Fish",
-        "Test",
-        "Test2"
+        {
+          "title": "Fresh Fruit",
+          "type": "drink",
+          "catergory": "test",
+          "ingredients": [
+            "test"
+          ],
+          "cook_time": "test",
+          "temperature": null,
+          "directions": [
+            "test"
+          ]
+        }
       ]
     },
     {

@@ -26,7 +26,7 @@ class RecipeOrganizer:
         print()
         print("Current Recipes:")
         for i, recipe in enumerate(RecipeOrganizer.recipes, start=1):
-            print(f"{i}. {recipe.title}")
+            print(f"{i}. {recipe['title']}")
         print()
 
     def sort_recipes(self):
