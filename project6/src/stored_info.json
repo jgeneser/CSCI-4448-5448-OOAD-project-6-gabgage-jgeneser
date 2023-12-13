@@ -49,6 +49,31 @@
           ]
         }
       ]
+    },
+    {
+      "username": "user3",
+      "email": "user3@gmail.com",
+      "full_name": "user3",
+      "password": "three",
+      "recipes": [
+        {
+          "title": "Lemonade",
+          "type": "drink",
+          "catergory": "Summer",
+          "ingredients": [
+            "Water",
+            "Sugar",
+            "Lemons"
+          ],
+          "cook_time": "5 mins",
+          "temperature": null,
+          "directions": [
+            "Put water in a pitcher",
+            "put sugar in water",
+            "squeeze lemons"
+          ]
+        }
+      ]
     }
   ]
 }
