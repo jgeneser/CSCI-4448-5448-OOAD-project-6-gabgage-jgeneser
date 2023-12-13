@@ -32,6 +32,21 @@
           "directions": [
             "eat the bread"
           ]
+        },
+        {
+          "title": "Pizza",
+          "type": "meal",
+          "catergory": "Dinner",
+          "ingredients": [
+            "A frozen pizza"
+          ],
+          "cook_time": "45 mins",
+          "temperature": "375",
+          "directions": [
+            "Put pizza in oven",
+            "Wait 45 mins",
+            "Eat it"
+          ]
         }
       ]
     },
