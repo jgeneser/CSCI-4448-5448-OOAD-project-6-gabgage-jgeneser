@@ -19,24 +19,6 @@
       "email": "test",
       "full_name": "Ella Gage",
       "password": "test",
-      "recipes": [
-        "Pasta",
-        "Pasta",
-        "Pasta",
-        "Bagel",
-        "Bagel",
-        "test",
-        "test",
-        "Sandwich",
-        "please fuckin work",
-        "ok that one worked"
-      ]
-    },
-    {
-      "username": "test",
-      "email": "test",
-      "full_name": "recipetest",
-      "password": "test",
       "recipes": []
     }
   ]
