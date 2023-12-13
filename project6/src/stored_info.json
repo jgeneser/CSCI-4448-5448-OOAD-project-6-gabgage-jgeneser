@@ -47,6 +47,22 @@
             "Wait 45 mins",
             "Eat it"
           ]
+        },
+        {
+          "title": "Noodles",
+          "type": "standard",
+          "catergory": "standard",
+          "ingredients": [
+            "Noodles",
+            "water",
+            "sauce"
+          ],
+          "cook_time": "30",
+          "temperature": "stove",
+          "directions": [
+            "heat up noodles",
+            "put sauce on them"
+          ]
         }
       ]
     },
