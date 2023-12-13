@@ -99,7 +99,7 @@ class Driver:
         }
 
     
-    def add_recipe_to_json(self, username, new_recipe):
+    def add_recipe_to_json(username, new_recipe):
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
             data = json.load(file)
@@ -116,34 +116,35 @@ class Driver:
 
     
     def run_simulation(self, user):
-        #OBSERVER PATTERN
-        manager = RecipeManager()
-        # Create observers
-        recipe_observer = RecipePrinter()
-        # Add observers to the manager
-        manager.add_observer(recipe_observer)
-        #SINGLETON PATTERN
-        recipe_organizer = RecipeOrganizer()
-        # Display Menu Options
-        print("\nOptions:")
-        print("1. View your saved recipes")
-        print("2. Create a new recipe")
-        print("3. Sign out")
-        print("4. End Program")
-        #get the choice from the menu
-        choice = input("Enter your choice: ")
-        # if the choice is 1: view saved recipes
-        if choice == '1':
-            Driver.viewSavedRecipes(user, recipe_organizer, manager)
-        elif choice == '2':
-            Driver.createNewRecipe(user, recipe_organizer, manager)
-        elif choice == '3':
-            print("Welcome to the BookMarked!")
-            user = Driver.prompt_and_create_user()
-        elif choice == '4':
-            return False
-        else:
-            print("Invalid choice. Please try again")
+        while True:
+            #OBSERVER PATTERN
+            manager = RecipeManager()
+            # Create observers
+            recipe_observer = RecipePrinter()
+            # Add observers to the manager
+            manager.add_observer(recipe_observer)
+            #SINGLETON PATTERN
+            recipe_organizer = RecipeOrganizer()
+            # Display Menu Options
+            print("\nOptions:")
+            print("1. View your saved recipes")
+            print("2. Create a new recipe")
+            print("3. Sign out")
+            print("4. End Program")
+            #get the choice from the menu
+            choice = input("Enter your choice: ")
+            # if the choice is 1: view saved recipes
+            if choice == '1':
+                Driver.viewSavedRecipes(user, recipe_organizer, manager)
+            elif choice == '2':
+                Driver.createNewRecipe(user, recipe_organizer, manager)
+            elif choice == '3':
+                print("Welcome to the BookMarked!")
+                user = Driver.prompt_and_create_user()
+            elif choice == '4':
+                return False
+            else:
+                print("Invalid choice. Please try again")
 
     
     def createNewRecipe(user, recipe_organizer, manager):

@@ -62,6 +62,6 @@ class User:
         instructions = User.get_instructions()
         new_recipe = recipeFactory.create_recipe_types(recipe_type, title=title, category=category, ingredients=ingredients, instructions=instructions)
 
-        self.recipes.append(new_recipe)
+        # self.recipes.append(new_recipe)
 
         return new_recipe

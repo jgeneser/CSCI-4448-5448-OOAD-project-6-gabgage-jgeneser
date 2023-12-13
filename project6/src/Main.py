@@ -7,9 +7,8 @@ from User import User
 def main():
     driver = Driver()
     user = driver.intalize()
-    while True:
-        if not driver.run_simulation(user):
-            break
+    driver.run_simulation(user)
+            
             
 
 if __name__ == "__main__":
