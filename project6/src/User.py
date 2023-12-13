@@ -85,15 +85,27 @@ class User:
     
 
     # this function removes the recipe from the json
-    def remove_recipe_from_json(self, recipe):
+    def remove_recipe_from_json(self, delete_this_recipe, username):
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
             data = json.load(file)
-        print("Searching through users")
-        for user in data['users']:
-            if user['username'] == self.username:
-                print("Found a matching username!")
-                user['recipes'].remove(recipe)
-        with open(file_path, 'w') as file:
-            json.dump(data, file, indent=2)
-        
+
+        # Find the user by username
+        user_index = None
+        for i, user in enumerate(data['users']):
+            if user['username'] == username:
+                user_index = i
+                break
+
+        # If the user is found, remove the recipe by title
+        if user_index is not None:
+            recipes = data['users'][user_index]['recipes']
+            updated_recipes = [recipe for recipe in recipes if recipe['title'] != delete_this_recipe.title]
+            data['users'][user_index]['recipes'] = updated_recipes
+
+            # Save the modified data back to the file
+            with open(file_path, 'w') as file:
+                json.dump(data, file, indent=2)
+        else:
+            print(f"User with username '{username}' not found.")
+

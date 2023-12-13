@@ -234,7 +234,7 @@ class Driver:
                     manager.update_recipe(selected_recipe.title)
 
                     # Delete the recipe
-                    user.remove_recipe_from_json(selected_recipe)
+                    user.remove_recipe_from_json(selected_recipe, user.username)
 
                 if choice == '4':
                     print("You have selected to update your recipe")

@@ -46,6 +46,7 @@ class Recipe:
     
     def update_recipe(self):
         print()
+        # old_recipe = Recipe(self.title, self.category, self.ingredients, self.instructions)
         while True:
             print("Which section would you like to update: ")
             print("1. Title")
