@@ -32,7 +32,6 @@ class Driver:
                 #Check if the user had recipes saved
                 if user["recipes"]:
                     for recipe in user["recipes"]:
-                        recipeFactory = RecipeFactory()
                         #Making the ingredients arr
                         ingredients = []
                         for ing in recipe["ingredients"]:
@@ -41,7 +40,6 @@ class Driver:
 
                         #Getting the instructions
                         instructions = Instructions(recipe["cook_time"], recipe["temperature"], recipe["directions"])
-                        #new_recipe = recipeFactory.create_recipe_types(recipe["type"], title=recipe["title"], category=recipe["catergory"], ingredients=ingredients, instructions=instructions)
                         new_recipe = Recipe(recipe["title"], recipe["catergory"], ingredients, instructions)
                         current_user.add_recipe(new_recipe)
                         recipe_organizer.add_recipe(new_recipe)
@@ -157,8 +155,9 @@ class Driver:
             print("\nOptions:")
             print("1. View your saved recipes")
             print("2. Create a new recipe")
-            print("3. Sign out")
-            print("4. End Program")
+            print("3. Search Recipes")
+            print("4. Sign out")
+            print("5. End Program")
             #get the choice from the menu
             choice = input("Enter your choice: ")
             # if the choice is 1: view saved recipes
@@ -167,13 +166,37 @@ class Driver:
             elif choice == '2':
                 Driver.createNewRecipe(user, recipe_organizer, manager)
             elif choice == '3':
+                Driver.searchRecipes(user, recipe_organizer, manager)
+            elif choice == '4':
                 print()
                 print("Welcome to the BookMarked!")
                 user = Driver.prompt_and_create_user()
-            elif choice == '4':
+            elif choice == '5':
                 return False
             else:
                 print("Invalid choice. Please try again")
+
+    
+    def searchRecipes(user, recipe_organizer, manager): #https://www.geeksforgeeks.org/python-finding-strings-with-given-substring-in-list/
+        search_word = input("Search: ")
+        print(search_word)
+        searched_recipes = []
+        for recipe in user.recipes:
+            print(recipe.title)
+            if search_word.lower() in recipe.title.lower():
+                searched_recipes.append(recipe)
+        if not searched_recipes:
+            print(f"You have no recipes containing '{search_word}'")
+        else:
+            print(f"Here are the recipes that contain '{search_word}' in their title:")
+            print()
+            for i, recipe in enumerate(searched_recipes, start=1):
+                print(f"{i}. {recipe.title}")
+            print()
+            search_choice = input("Which one are you interested in taking a look at: ")
+            selected_recipe = user.recipes[int(search_choice) - 1]
+            selected_recipe.display_recipe()
+            Driver.inspectRecipe(user, selected_recipe, recipe_organizer, manager)
 
     
     def createNewRecipe(user, recipe_organizer, manager):
@@ -202,52 +225,54 @@ class Driver:
                 selected_recipe = user.recipes[recipe_number - 1]
                 print(f"Recipe: {selected_recipe.title}")
                 selected_recipe.display_recipe()
+                Driver.inspectRecipe(user, selected_recipe, recipe_organizer, manager)
+    
+    def inspectRecipe(user, selected_recipe, recipe_organizer, manager):
+        # For the Decorator Pattern:
+        print("Would you like to do any of the following to your recipe:")
+        print("1. Leave a comment")
+        print("2. Leave a Review")
+        print("3. Delete the Recipe")
+        print("4. Edit the Recipe")
+        print("5. Exit")
+        choice = input("Enter numerical choice: ")
+        print(choice)
+        if choice == '1':
+            RecipeDecorator(selected_recipe)
+            input_comment = input("Please type your comment: ")
+            decorated_recipe = CommentDecorator(selected_recipe, input_comment)
+            print()
+            decorated_recipe.display(input_comment)
+        if choice == '2':
+            RecipeDecorator(selected_recipe)
+            input_review = input("Please type your review: ")
+            decorated_recipe = ReviewDecorator(selected_recipe, input_review)
+            print()
+            decorated_recipe.display(input_review)
+        if choice == '3': 
+            # Remove from Singleton organizer
+            recipe_organizer.remove_recipe(selected_recipe)
+            user.recipes.remove(selected_recipe)
+            recipe_organizer.sort_recipes()
+            recipe_organizer.print_recipes()
+            
+            # Notify Observer
+            manager.update_recipe(selected_recipe.title)
 
-                # For the Decorator Pattern:
-                print("Would you like to do any of the following to your recipe:")
-                print("1. Leave a comment")
-                print("2. Leave a Review")
-                print("3. Delete the Recipe")
-                print("4. Edit the Recipe")
-                print("5. Exit")
-                choice = input("Enter numerical choice: ")
-                print(choice)
-                if choice == '1':
-                    RecipeDecorator(selected_recipe)
-                    input_comment = input("Please type your comment: ")
-                    decorated_recipe = CommentDecorator(selected_recipe, input_comment)
-                    print()
-                    decorated_recipe.display(input_comment)
-                if choice == '2':
-                    RecipeDecorator(selected_recipe)
-                    input_review = input("Please type your review: ")
-                    decorated_recipe = ReviewDecorator(selected_recipe, input_review)
-                    print()
-                    decorated_recipe.display(input_review)
-                if choice == '3': 
-                    # Remove from Singleton organizer
-                    recipe_organizer.remove_recipe(selected_recipe)
-                    user.recipes.remove(selected_recipe)
-                    recipe_organizer.sort_recipes()
-                    recipe_organizer.print_recipes()
-                    
-                    # Notify Observer
-                    manager.update_recipe(selected_recipe.title)
+            # Delete the recipe
+            user.remove_recipe_from_json(selected_recipe, user.username)
 
-                    # Delete the recipe
-                    user.remove_recipe_from_json(selected_recipe, user.username)
+        if choice == '4':
+            print("You have selected to update your recipe")
+            user.remove_recipe_from_json(selected_recipe, user.username)
+            user.recipes.remove(selected_recipe)
+            
+            updated_recipe = selected_recipe.update_recipe(user)
 
-                if choice == '4':
-                    print("You have selected to update your recipe")
-                    user.remove_recipe_from_json(selected_recipe, user.username)
-                    user.recipes.remove(selected_recipe)
-                    
-                    updated_recipe = selected_recipe.update_recipe(user)
+            recipe_organizer.remove_recipe(selected_recipe)
+            recipe_organizer.sort_recipes()
 
-                    recipe_organizer.remove_recipe(selected_recipe)
-                    recipe_organizer.sort_recipes()
-
-                    user.add_recipe_to_json(updated_recipe)
-                    recipe_organizer.add_recipe(updated_recipe)
-                    user.recipes.append(updated_recipe)
-                    recipe_organizer.sort_recipes()
+            user.add_recipe_to_json(updated_recipe)
+            recipe_organizer.add_recipe(updated_recipe)
+            user.recipes.append(updated_recipe)
+            recipe_organizer.sort_recipes()
