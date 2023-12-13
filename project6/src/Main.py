@@ -5,6 +5,7 @@ from User import User
 from Recipe import Recipe, display_recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
+from RecipeDecorator import RecipeDecorator, CommentDecorator, ReviewDecorator
 from RecipeFactory import RecipeFactory
 # This function imports all of the users from the stored_info.json file and makes them all users
 
@@ -38,12 +39,27 @@ def main():
                 user.display_current_recipes()
                 recipe_number = int(input("Enter the number of the recipe to view: "))
                 if 1 <= recipe_number <= len(recipe_organizer.recipes):
-                    selected_recipe = recipe_organizer.recipes[recipe_number - 1]
+                    selected_recipe = user.recipes[recipe_number - 1]
                     print(f"Recipe: {selected_recipe.title}")
                     display_recipe(selected_recipe)
-                    delete = input("Would you like to delete this recipe (yes/no): ")
+
+                    # For the Decorator Pattern:
+                    comment = input("Would you like to leave a comment for this recipe (yes/no): ")
+                    if comment == "yes" or comment == "y":
+                        RecipeDecorator(selected_recipe)
+                        input_comment = input("Please type your comment: ")
+                        decorated_recipe = CommentDecorator(selected_recipe, input_comment)
+                        decorated_recipe.display(input_comment)
+
+                    review = input("Would you like to leave a review for this recipe (yes/no): ")
+                    if review == "yes" or review == "y":
+                        RecipeDecorator(selected_recipe)
+                        input_review = input("Please type your review: ")
+                        decorated_recipe = ReviewDecorator(selected_recipe, input_review)
+                        decorated_recipe.display(input_review)
 
                     #To delete a recipe
+                    delete = input("Would you like to delete this recipe (yes/no): ")
                     if delete == "yes" or delete == "y":
                         # remove from Singleton organizer
                         recipe_organizer.remove_recipe(selected_recipe)

@@ -1,16 +1,6 @@
 {
   "recipes": [
-    {
-      "title": "Rebull",
-      "catergory": "fav",
-      "ingredients": [
-        "redbull"
-      ],
-      "cook_time": "none",
-      "temperature": "none",
-      "directions": [
-        "pour redbull into glass"
-      ]
-    }
+    
+    
   ]
 }
