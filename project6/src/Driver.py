@@ -148,6 +148,7 @@ class Driver:
             elif choice == '2':
                 Driver.createNewRecipe(user, recipe_organizer, manager)
             elif choice == '3':
+                print()
                 print("Welcome to the BookMarked!")
                 user = Driver.prompt_and_create_user()
             elif choice == '4':
