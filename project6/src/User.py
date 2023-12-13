@@ -95,4 +95,17 @@ def format_new_user(email, username, password, full_name):
         "recipes": []
     }
 
+def add_recipe_to_json(username, new_recipe):
+    file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
+    with open(file_path, "r") as file:
+        data = json.load(file)
+    # Find the user in the list
+    for user in data["users"]:
+        if user["username"] == username:
+            # Add the recipe to the user's recipes
+            user["recipes"].append(new_recipe)
+            break
 
+    # Save the updated data back to the file
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=2)

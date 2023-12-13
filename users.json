@@ -26,7 +26,9 @@
       "email": "test",
       "full_name": "recipetest",
       "password": "test",
-      "recipes": []
+      "recipes": [
+        "Work please"
+      ]
     }
   ]
 }

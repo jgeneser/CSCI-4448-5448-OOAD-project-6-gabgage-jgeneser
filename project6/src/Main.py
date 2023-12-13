@@ -1,7 +1,7 @@
 # GameEngine.py
 
 from Driver import Driver
-from User import User, prompt_and_create_user
+from User import User, prompt_and_create_user, add_recipe_to_json
 from Recipe import Recipe, create_recipe, display_recipe, delete_recipe  # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
@@ -81,6 +81,9 @@ def main():
             print()
             new_recipe = create_recipe()
             user.add_recipe(new_recipe)
+
+            #Add recipe to JSON
+            add_recipe_to_json(user.username, new_recipe.title)
 
             # Add to singleton organizer
             recipe_organizer.add_recipe(new_recipe)
