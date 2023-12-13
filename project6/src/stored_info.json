@@ -5,7 +5,9 @@
       "email": "juge5499@colorado.edu",
       "full_name": "Jules Geneser",
       "password": "Jules",
-      "recipes": []
+      "recipes": [
+        "Rebull"
+      ]
     },
     {
       "username": "user2",

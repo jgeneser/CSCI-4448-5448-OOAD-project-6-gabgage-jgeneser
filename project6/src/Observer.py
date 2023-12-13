@@ -15,7 +15,6 @@ class RecipePrinter(RecipeObserver):
         print("==== " + recipe + " ====")
 
 
-
 # Subject
 class RecipeManager:
     def __init__(self):

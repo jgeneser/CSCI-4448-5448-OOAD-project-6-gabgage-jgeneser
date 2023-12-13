@@ -1,10 +1,11 @@
 # GameEngine.py
 
 from Driver import Driver
-from User import User, prompt_and_create_user, add_recipe_to_json
+from User import User
 from Recipe import Recipe, display_recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
+from RecipeFactory import RecipeFactory
 # This function imports all of the users from the stored_info.json file and makes them all users
 
 def main():
@@ -20,8 +21,6 @@ def main():
 
     #SINGLETON PATTERN
     recipe_organizer = RecipeOrganizer()
-
-
 
     while True:
         print("\nOptions:")
@@ -57,14 +56,6 @@ def main():
                         delete_recipe(selected_recipe, user.recipes)
                     
 
-
-                    # print("1. View Recipe")
-                    # print("2. Exit")
-                    # inner_choice = input("Enter your choice: ")
-                    # if inner_choice == 1:
-                        # display_recipe(selected_recipe)
-                    
-
                 #     
                 #     print("Ingredients: ", ', '.join(ingredient.name for ingredient in selected_recipe.ingredients))
                 #     print("Instructions: ")
@@ -82,7 +73,7 @@ def main():
             user.add_recipe(new_recipe)
 
             #Add recipe to JSON
-            add_recipe_to_json(user.username, new_recipe.title)
+            driver.add_recipe_to_json(user.username, new_recipe.title)
             add_recipe_info_to_json(new_recipe)
 
             # Add to singleton organizer
@@ -98,7 +89,7 @@ def main():
 
         elif choice == '3':
             print("Welcome to the BookMarked!")
-            user = prompt_and_create_user()
+            user = driver.prompt_and_create_user()
 
         else:
             print("Invalid choice. Please try again")
