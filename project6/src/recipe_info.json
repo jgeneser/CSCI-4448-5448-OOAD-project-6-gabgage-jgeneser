@@ -1,6 +1,70 @@
 {
   "recipes": [
-    
-    
+    {
+      "title": "Noodles",
+      "catergory": "Favs",
+      "ingredients": [
+        "1 box of noodles",
+        "1 tbs of salt",
+        "2 tbs of cheese"
+      ],
+      "cook_time": "10 mins",
+      "temperature": "Boil Water",
+      "directions": [
+        "1. boil water",
+        "2. pour noodles into water",
+        "3. stir periodically for 10 mins",
+        "4. drain water",
+        "5. add salt and cheese",
+        "6. Enjoy"
+      ]
+    },
+    {
+      "title": "Burgers",
+      "catergory": "Favs",
+      "ingredients": [
+        "1 lbs of Ground Beef",
+        "Spices",
+        "Slices Cheese"
+      ],
+      "cook_time": "10 mins",
+      "temperature": "400 F on Grill",
+      "directions": [
+        "Start the grill and get it to 400 F",
+        "Make the ground beef patties",
+        "Put them on the grill and cook 5 mins each side",
+        "Take off grill",
+        "add cheese",
+        "enjoy"
+      ]
+    },
+    {
+      "title": "Noods",
+      "catergory": "favs",
+      "ingredients": [
+        "noods"
+      ],
+      "cook_time": "10",
+      "temperature": "none",
+      "directions": [
+        "boil",
+        "pour",
+        "enjoy"
+      ]
+    },
+    {
+      "title": "Noods",
+      "catergory": "favs",
+      "ingredients": [
+        "noods"
+      ],
+      "cook_time": "1-",
+      "temperature": "none",
+      "directions": [
+        "boil",
+        "strain",
+        "enjoy"
+      ]
+    }
   ]
 }

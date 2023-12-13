@@ -9,6 +9,21 @@ class Recipe:
         self.category = category
         self.ingredients = ingredients
         self.instructions = instructions
+        
+        #display the recipe
+    def display_recipe(self):
+        print("\nTitle:", self.title)
+        print("Category:", self.category)
+        print("Ingredients:")
+        for ingredient in self.ingredients:
+            print("  -", ingredient.name)
+        print("Instructions:")
+        print("  Cook Time:", self.instructions.cook_time)
+        print("  Temperature:", self.instructions.temperature)
+        print("  Directions:")
+        for step in self.instructions.directions:
+            print("    -", step)
+        print("\n")
 
 class Instructions:
     def __init__(self, cook_time, temperature, directions):
@@ -20,29 +35,12 @@ class Ingredient:
     def __init__(self, name):
         self.name = name
 
-#display the recipe
-def display_recipe(recipe):
-    print("\nTitle:", recipe.title)
-    print("Category:", recipe.category)
-    print("Ingredients:")
-    for ingredient in recipe.ingredients:
-        print("  -", ingredient.name)
-    print("Instructions:")
-    print("  Cook Time:", recipe.instructions.cook_time)
-    print("  Temperature:", recipe.instructions.temperature)
-    print("  Directions:")
-    for step in recipe.instructions.directions:
-        print("    -", step)
-    print("\n")
 
 def delete_recipe(recipe, user_recipes):
     for rec in user_recipes:
         if rec.title == recipe.title:
             user_recipes.remove(recipe)
             return
-  
-# create_recipe()
-# display_recipes(recipeList)
 
 def format_new_recipe(recipe):
     ings = []

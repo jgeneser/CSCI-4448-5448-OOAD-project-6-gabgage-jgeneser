@@ -1,6 +1,12 @@
 import json
 import os
 from User import User
+from Observer import RecipeObserver, RecipeManager, RecipePrinter
+from RecipeOrganizer import RecipeOrganizer
+from RecipeDecorator import RecipeDecorator, CommentDecorator, ReviewDecorator
+from RecipeFactory import RecipeFactory
+from Recipe import Recipe, delete_recipe, add_recipe_info_to_json # Import the display_recipes function
+
 
 class Driver:
     def __init__(self):
@@ -92,7 +98,8 @@ class Driver:
             "recipes": []
         }
 
-    def add_recipe_to_json(username, new_recipe):
+    
+    def add_recipe_to_json(self, username, new_recipe):
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
             data = json.load(file)
@@ -106,3 +113,95 @@ class Driver:
         # Save the updated data back to the file
         with open(file_path, 'w') as file:
             json.dump(data, file, indent=2)
+
+    
+    def run_simulation(self, user):
+        #OBSERVER PATTERN
+        manager = RecipeManager()
+        # Create observers
+        recipe_observer = RecipePrinter()
+        # Add observers to the manager
+        manager.add_observer(recipe_observer)
+        #SINGLETON PATTERN
+        recipe_organizer = RecipeOrganizer()
+        # Display Menu Options
+        print("\nOptions:")
+        print("1. View your saved recipes")
+        print("2. Create a new recipe")
+        print("3. Sign out")
+        print("4. End Program")
+        #get the choice from the menu
+        choice = input("Enter your choice: ")
+        # if the choice is 1: view saved recipes
+        if choice == '1':
+            Driver.viewSavedRecipes(user, recipe_organizer, manager)
+        elif choice == '2':
+            Driver.createNewRecipe(user, recipe_organizer, manager)
+        elif choice == '3':
+            print("Welcome to the BookMarked!")
+            user = Driver.prompt_and_create_user()
+        elif choice == '4':
+            return False
+        else:
+            print("Invalid choice. Please try again")
+
+    
+    def createNewRecipe(user, recipe_organizer, manager):
+        print()
+        new_recipe = user.create_recipe()
+        user.add_recipe(new_recipe)
+
+        #Add recipe to JSON
+        Driver.add_recipe_to_json(user.username, new_recipe.title)
+        add_recipe_info_to_json(new_recipe)
+
+        # Add to singleton organizer
+        recipe_organizer.add_recipe(new_recipe)
+
+        # Notify Observer
+        manager.update_recipe(new_recipe.title)
+
+        #Print sorted list via singleotn organizer
+        recipe_organizer.sort_recipes()
+        recipe_organizer.print_recipes()
+    
+    
+    def viewSavedRecipes(user, recipe_organizer, manager):
+        print()
+        if not user.recipes:
+            print("No recipes found on your account!")
+        else:
+            user.display_current_recipes()
+            recipe_number = int(input("Enter the number of the recipe to view: "))
+            if 1 <= recipe_number <= len(recipe_organizer.recipes):
+                selected_recipe = user.recipes[recipe_number - 1]
+                print(f"Recipe: {selected_recipe.title}")
+                selected_recipe.display_recipe()
+
+                # For the Decorator Pattern:
+                comment = input("Would you like to leave a comment for this recipe (yes/no): ")
+                if comment == "yes" or comment == "y":
+                    RecipeDecorator(selected_recipe)
+                    input_comment = input("Please type your comment: ")
+                    decorated_recipe = CommentDecorator(selected_recipe, input_comment)
+                    decorated_recipe.display(input_comment)
+
+                review = input("Would you like to leave a review for this recipe (yes/no): ")
+                if review == "yes" or review == "y":
+                    RecipeDecorator(selected_recipe)
+                    input_review = input("Please type your review: ")
+                    decorated_recipe = ReviewDecorator(selected_recipe, input_review)
+                    decorated_recipe.display(input_review)
+
+                #To delete a recipe
+                delete = input("Would you like to delete this recipe (yes/no): ")
+                if delete == "yes" or delete == "y":
+                    # remove from Singleton organizer
+                    recipe_organizer.remove_recipe(selected_recipe)
+                    recipe_organizer.sort_recipes()
+                    recipe_organizer.print_recipes()
+                    
+                    # Notify Observer
+                    manager.update_recipe(selected_recipe.title)
+
+                    delete_recipe(selected_recipe, user.recipes)
