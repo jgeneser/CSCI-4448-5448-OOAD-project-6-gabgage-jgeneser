@@ -34,6 +34,13 @@
           ]
         }
       ]
+    },
+    {
+      "username": "d",
+      "email": "d",
+      "full_name": "d",
+      "password": "d",
+      "recipes": []
     }
   ]
 }

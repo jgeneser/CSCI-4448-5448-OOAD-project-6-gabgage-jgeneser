@@ -4,6 +4,8 @@ from User import User
 from Observer import RecipeObserver, RecipeManager, RecipePrinter
 from RecipeOrganizer import RecipeOrganizer
 from RecipeDecorator import RecipeDecorator, CommentDecorator, ReviewDecorator
+from Recipe import Recipe, Instructions, Ingredient
+from RecipeFactory import RecipeFactory
 
 
 class Driver:
@@ -19,19 +21,37 @@ class Driver:
             User(user['email'], user['password'], user['username'], user['full_name'])
 
     # import the previous recipes 
-    def importRecipes(user):
+    def importRecipes(username, current_user, recipe_organizer):
         file_path = os.path.join(os.path.dirname(__file__), "stored_info.json")
         with open(file_path, "r") as file:
             data = json.load(file)
-        for user in data['users']:
-            if user['username'] == user.username:
-                print("we matched")
-    
-    def intalize(self):
+
+        # Find the user in the list
+        for user in data["users"]:
+            if user["username"] == username:
+                #Check if the user had recipes saved
+                if user["recipes"]:
+                    for recipe in user["recipes"]:
+                        recipeFactory = RecipeFactory()
+                        #Making the ingredients arr
+                        ingredients = []
+                        for ing in recipe["ingredients"]:
+                            ingredient = Ingredient(name=ing)
+                            ingredients.append(ingredient)
+
+                        #Getting the instructions
+                        instructions = Instructions(recipe["cook_time"], recipe["temperature"], recipe["directions"])
+                        #new_recipe = recipeFactory.create_recipe_types(recipe["type"], title=recipe["title"], category=recipe["catergory"], ingredients=ingredients, instructions=instructions)
+                        new_recipe = Recipe(recipe["title"], recipe["catergory"], ingredients, instructions)
+                        current_user.add_recipe(new_recipe)
+                        recipe_organizer.add_recipe(new_recipe)
+   
+    def intalize(self, recipe_organizer):
         print()
         print("Welcome to the BookMarked!")
         Driver.importUsers()
         user = Driver.prompt_and_create_user()
+        Driver.importRecipes(user.username, user, recipe_organizer)
         return user
     
     # This function prompts the creation or login of a user and returns a User object
@@ -124,7 +144,7 @@ class Driver:
             json.dump(data, file, indent=2)
 
     
-    def run_simulation(self, user):
+    def run_simulation(self, user, recipe_organizer):
         while True:
             #OBSERVER PATTERN
             manager = RecipeManager()
@@ -132,8 +152,7 @@ class Driver:
             recipe_observer = RecipePrinter()
             # Add observers to the manager
             manager.add_observer(recipe_observer)
-            #SINGLETON PATTERN
-            recipe_organizer = RecipeOrganizer()
+
             # Display Menu Options
             print("\nOptions:")
             print("1. View your saved recipes")
@@ -206,7 +225,7 @@ class Driver:
                     print()
                     decorated_recipe.display(input_review)
                 if choice == '3': 
-                    # remove from Singleton organizer
+                    # Remove from Singleton organizer
                     recipe_organizer.remove_recipe(selected_recipe)
                     recipe_organizer.sort_recipes()
                     recipe_organizer.print_recipes()
