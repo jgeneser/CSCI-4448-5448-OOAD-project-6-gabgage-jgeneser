@@ -5,21 +5,7 @@
       "email": "juge5499@colorado.edu",
       "full_name": "Jules Geneser",
       "password": "Jules",
-      "recipes": [
-        {
-          "title": "Fresh Fruit",
-          "type": "drink",
-          "catergory": "test",
-          "ingredients": [
-            "test"
-          ],
-          "cook_time": "test",
-          "temperature": null,
-          "directions": [
-            "test"
-          ]
-        }
-      ]
+      "recipes": []
     },
     {
       "username": "user2",

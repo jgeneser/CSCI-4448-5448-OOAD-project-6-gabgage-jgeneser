@@ -63,10 +63,9 @@ class User:
         ingredients = User.get_ingredients()
         instructions = User.get_instructions(recipe_type)
         new_recipe = recipeFactory.create_recipe_types(recipe_type, title=title, category=category, ingredients=ingredients, instructions=instructions)
-        new_recipe = new_recipe.format_new_recipe()
-        self.add_recipe_to_json(new_recipe)
+        new_recipe_json = new_recipe.format_new_recipe()
+        self.add_recipe_to_json(new_recipe_json)
         self.add_recipe(new_recipe)
-
         # self.recipes.append(new_recipe)
         return new_recipe
 

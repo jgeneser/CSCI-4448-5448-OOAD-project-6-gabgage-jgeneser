@@ -163,7 +163,7 @@ class Driver:
         recipe_organizer.add_recipe(new_recipe)
 
         # Notify Observer
-        manager.update_recipe(new_recipe['title'])
+        manager.update_recipe(new_recipe.title)
 
         #Print sorted list via singleotn organizer
         recipe_organizer.sort_recipes()
