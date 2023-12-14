@@ -1,4 +1,7 @@
 # Observer interface
+
+# This is the Observer pattern. Here the pattern is waiting to see when a recipe is added or deleted, and once that occurs
+# the observer notifies the console
 class RecipeObserver():
     def update(self, recipe):
         pass

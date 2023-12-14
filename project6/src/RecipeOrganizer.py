@@ -1,4 +1,8 @@
 oragnizer_recipes = []
+
+#The RecipeOrganizer class implements the Singleton design pattern
+#There is only one instanciation of the organizer
+
 class RecipeOrganizer:
     instance = None
     recipes = []

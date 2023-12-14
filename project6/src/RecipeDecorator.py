@@ -1,3 +1,6 @@
+#The recipeDecorator class demonstrates the decorator pattern
+#The decorator takes in a recipe object and decocorates it with either a comment or review depending on what the user inputs
+
 class RecipeDecorator:
     def __init__(self, recipe):
         self.recipe = recipe
