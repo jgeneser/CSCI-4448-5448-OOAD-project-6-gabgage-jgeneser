@@ -3,6 +3,7 @@ from DrinkRecipe import DrinkRecipe
 from DessertRecipe import DessertRecipe
 
 # this is the factory pattern to create the different types of recipe
+# source: https://www.tutorialspoint.com/design_pattern/factory_pattern.htm
 class RecipeFactory:
     @staticmethod
     def create_recipe_types(recipe_type, **kwargs):
