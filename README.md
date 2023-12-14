@@ -1,6 +1,5 @@
 # CSCI-4448-5448-OOAD-project-6-gabgage-jgeneser
 
-BookMarked
 Ella Gage and Jules Geneser
 
 BookMarked is a terminal based program designed to allow users to save thier cooking recipes into one place. Users can:
