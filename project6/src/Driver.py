@@ -292,7 +292,7 @@ class Driver:
         if choice == '5': # the user wants to update the recipe
             user.remove_recipe_from_json(selected_recipe, user.username)
             user.recipes.remove(selected_recipe)
-            updated_recipe = selected_recipe.update_recipe(user)
+            updated_recipe = selected_recipe.update_recipe()
             recipe_organizer.remove_recipe(selected_recipe)
             recipe_organizer.sort_recipes()
             # add the updates recipe to the json
