@@ -12,6 +12,7 @@ class User:
         self.password = password
         self.full_name = full_name
         self.recipes = []
+        self.grocery_list = []
         User.active_users.append(self)  # Add the new user to the active_users list
 
     def display_info(self):
@@ -25,6 +26,66 @@ class User:
         for i, recipe in enumerate(self.recipes, start=1):
             print(f"{i}. {recipe.title}")
         print()
+
+    def add_ingredients_to_grocery_list(self, selected_recipe):
+        #NEED TO CHECK FOR DUPLICATES
+        for ingredient in selected_recipe.ingredients:
+            self.grocery_list.append(ingredient.name)
+
+    def grocery_procedure(self):
+        self.view_grocery_list()
+        self.grocery_list_actions()
+    
+    def view_grocery_list(self):
+        print()
+        print(f"{self.full_name}'s Grocery List:")
+        for i, item in enumerate(self.grocery_list, start=1):
+            print(f"{i}. {item}")
+    
+    def grocery_list_actions(self):
+        print("\nWould you like to do any of the following to your grocery list:")
+        print("1. Add Individual Item")
+        print("2. Remove Items")
+        print("3. Clear All Items")
+        print("4. None")
+        choice = input("Input your choice here: ")
+        if choice == '1':
+            self.add_to_grocery_list()
+            print("Updated Grocery List:")
+            self.view_grocery_list()
+        if choice == '2':
+            self.remove_from_grocery_list(False)
+            print("Updated Grocery List:")
+            self.view_grocery_list()
+        if choice == '3':
+            self.remove_from_grocery_list(True)
+            print("Updated Grocery List:")
+            self.view_grocery_list()
+        
+
+    
+    def remove_from_grocery_list(self, remove_all):
+        #if removed items is one larger then the length of the list cleat the whole list
+        if remove_all: #if the user has selected to remove all of the grocery list contence clear the grocery list
+            self.grocery_list.clear()
+        else:
+            removed_list = []
+            removed_items = input("Enter the number next to the items that you would like to remove (seperated by a comma): ")
+            removed_items = removed_items.split(",") 
+            for num in removed_items:
+                removed_list.append(self.grocery_list[int(num)-1])
+                print(self.grocery_list[int(num)-1])
+            for item in removed_list:
+                self.grocery_list.remove(item)
+
+    def add_to_grocery_list(self):
+        #NEED TO CHECK FOR DUPLICATES
+        added_items = input("Enter the number the names of the items you would like to add (seperated by a comma): ")
+        added_items = added_items.split(",")
+        for item in added_items:
+            self.grocery_list.append(item)
+            print(item)
+
 
     # Get user input for ingredients
     def get_ingredients():

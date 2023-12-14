@@ -152,12 +152,12 @@ class Driver:
             manager.add_observer(recipe_observer)
 
             # Display Menu Options
-            print("\nOptions:")
+            print("\nOptions")
             print("1. View your saved recipes")
             print("2. Create a new recipe")
             print("3. Search Recipes")
-            print("4. Sign out")
-            print("5. End Program")
+            print("4. View Grocery List")
+            print("5. Sign out")
             #get the choice from the menu
             choice = input("Enter your choice: ")
             # if the choice is 1: view saved recipes
@@ -168,10 +168,12 @@ class Driver:
             elif choice == '3':
                 Driver.searchRecipes(user, recipe_organizer, manager)
             elif choice == '4':
+                user.grocery_procedure()
+            elif choice == '5':
                 print()
                 print("Welcome to the BookMarked!")
                 user = Driver.prompt_and_create_user()
-            elif choice == '5':
+            elif choice == '6':
                 return False
             else:
                 print("Invalid choice. Please try again")
@@ -192,11 +194,12 @@ class Driver:
             print()
             for i, recipe in enumerate(searched_recipes, start=1):
                 print(f"{i}. {recipe.title}")
-            print()
+            print(f"{len(searched_recipes)+1}. None")
             search_choice = input("Which one are you interested in taking a look at: ")
-            selected_recipe = user.recipes[int(search_choice) - 1]
-            selected_recipe.display_recipe()
-            Driver.inspectRecipe(user, selected_recipe, recipe_organizer, manager)
+            if int(search_choice) <= len(searched_recipes):
+                selected_recipe = searched_recipes[int(search_choice) - 1]
+                selected_recipe.display_recipe() 
+                Driver.inspectRecipe(user, selected_recipe, recipe_organizer, manager)
 
     
     def createNewRecipe(user, recipe_organizer, manager):
@@ -232,9 +235,10 @@ class Driver:
         print("Would you like to do any of the following to your recipe:")
         print("1. Leave a comment")
         print("2. Leave a Review")
-        print("3. Delete the Recipe")
-        print("4. Edit the Recipe")
-        print("5. Exit")
+        print("3. Add ingredients to grocery list")
+        print("4. Delete the Recipe")
+        print("5. Edit the Recipe")
+        print("6. None of the Above")
         choice = input("Enter numerical choice: ")
         print(choice)
         if choice == '1':
@@ -249,7 +253,9 @@ class Driver:
             decorated_recipe = ReviewDecorator(selected_recipe, input_review)
             print()
             decorated_recipe.display(input_review)
-        if choice == '3': 
+        if choice == '3':
+            user.add_ingredients_to_grocery_list(selected_recipe)
+        if choice == '4': 
             # Remove from Singleton organizer
             recipe_organizer.remove_recipe(selected_recipe)
             user.recipes.remove(selected_recipe)
@@ -261,8 +267,7 @@ class Driver:
 
             # Delete the recipe
             user.remove_recipe_from_json(selected_recipe, user.username)
-
-        if choice == '4':
+        if choice == '5':
             print("You have selected to update your recipe")
             user.remove_recipe_from_json(selected_recipe, user.username)
             user.recipes.remove(selected_recipe)
