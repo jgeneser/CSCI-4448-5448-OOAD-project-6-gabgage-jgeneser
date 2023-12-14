@@ -21,10 +21,11 @@ class Recipe:
             print("    -", step)
         print("\n")
     
-    
+    # this function formats the recipe so that it can be added to the json file
     def format_new_recipe(recipe):
         ings = []
 
+        #go through the ingredient Objects and get the title
         for ingredient in recipe.ingredients:
             ings.append(ingredient.name)
 
@@ -39,10 +40,12 @@ class Recipe:
         }
 
     
-    def update_recipe(self, user):
+    # This fuction updates a selected recipe
+    def update_recipe(self):
         print()
         loop = True
         while loop == True:
+            # prompt the user to select which part of the recipe they would like update
             print("Which section would you like to update: ")
             print("1. Title")
             print("2. Category")
@@ -51,13 +54,13 @@ class Recipe:
             print("5. Temperature")
             print("6. Directions")
             choice = input("Enter the number of the section you would like to update: ")
-            if choice == '1':
+            if choice == '1': # update the title
                 new_title = input("Enter the new title: ")
                 self.title = new_title
-            if choice == '2':
+            if choice == '2': # update the category
                 new_category = input("Enter the new category: ")
                 self.category = new_category
-            if choice == '3':
+            if choice == '3': # update the ingredients
                 new_ingredients = []
                 while True:
                     ingredient_name = input("Enter an ingredient (or 'done' to finish): ").strip()
@@ -66,13 +69,13 @@ class Recipe:
                     ingredient = Ingredient(name=ingredient_name)
                     new_ingredients.append(ingredient)
                 self.ingredients = new_ingredients
-            if choice == '4':
+            if choice == '4': #update the cooktime
                 new_cooktime = input("Enter the new cook time: ")
                 self.instructions.cook_time = new_cooktime
-            if choice == '5':
+            if choice == '5': #update the temperature
                 new_temp = input("Enter the new cooking temp: ")
                 self.instructions.temperature = new_temp
-            if choice == '6':
+            if choice == '6': # update the directions
                 new_directions = []
                 while True:
                     step = input("Enter the cooking step (or 'done' to finish): ").strip()
@@ -80,6 +83,7 @@ class Recipe:
                         break
                     new_directions.append(step)
                 self.instructions.directions = new_directions
+            # see if the user would like to make any more updated
             continue_to_edit = input("Would you like to continue to edit this recipe? (yes/no): ").lower()
             if continue_to_edit == 'no' or 'n':
                 loop = False

@@ -117,7 +117,7 @@ class User:
 
         title = input("Enter the recipe title: ")
         category = input("Enter the recipe category: ")
-        recipe_type = input("Enter the recipe type (standard/dessert/soup/drink/meal): ")
+        recipe_type = input("Enter the recipe type (standard/dessert/drink): ")
         # Get ingredients
         ingredients = User.get_ingredients()
         instructions = User.get_instructions(recipe_type)

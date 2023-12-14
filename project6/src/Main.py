@@ -6,14 +6,9 @@ def main():
     driver = Driver()
     #SINGLETON PATTERN
     recipe_organizer = RecipeOrganizer()
-
     user = driver.intalize(recipe_organizer)
     driver.run_simulation(user, recipe_organizer)
             
             
-
 if __name__ == "__main__":
     main()
-
-
-

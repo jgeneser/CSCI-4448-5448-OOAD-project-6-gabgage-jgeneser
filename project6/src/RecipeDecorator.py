@@ -2,8 +2,6 @@ class RecipeDecorator:
     def __init__(self, recipe):
         self.recipe = recipe
 
-
-
 class ReviewDecorator(RecipeDecorator):
     def __init__(self, recipe, review):
         super().__init__(recipe)
