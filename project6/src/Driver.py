@@ -215,7 +215,7 @@ class Driver:
             if int(search_choice) <= len(searched_recipes):
                 selected_recipe = searched_recipes[int(search_choice) - 1]
                 selected_recipe.display_recipe() 
-                Driver.inspectRecipe(user, selected_recipe, recipe_organizer, manager)
+                Driver.inspect_recipe(user, selected_recipe, recipe_organizer, manager)
 
     
     # this function creates a new recipe
