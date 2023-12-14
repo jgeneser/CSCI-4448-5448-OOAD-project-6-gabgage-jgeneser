@@ -1,5 +1,3 @@
-from Recipe import Recipe  # Import the display_recipes function
-
 # Observer interface
 class RecipeObserver():
     def update(self, recipe):

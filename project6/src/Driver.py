@@ -1,11 +1,9 @@
 import json
 import os
 from User import User
-from Observer import RecipeObserver, RecipeManager, RecipePrinter
-from RecipeOrganizer import RecipeOrganizer
+from Observer import RecipeManager, RecipePrinter
 from RecipeDecorator import RecipeDecorator, CommentDecorator, ReviewDecorator
 from Recipe import Recipe, Instructions, Ingredient
-from RecipeFactory import RecipeFactory
 
 
 class Driver:

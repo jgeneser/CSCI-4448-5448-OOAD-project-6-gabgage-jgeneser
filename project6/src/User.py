@@ -1,5 +1,4 @@
-from RecipeOrganizer import RecipeOrganizer
-from Recipe import Recipe, Ingredient, Instructions
+from Recipe import Ingredient, Instructions
 from RecipeFactory import RecipeFactory
 import os  
 import json 
@@ -74,7 +73,6 @@ class User:
             removed_items = removed_items.split(",") 
             for num in removed_items:
                 removed_list.append(self.grocery_list[int(num)-1])
-                print(self.grocery_list[int(num)-1])
             for item in removed_list:
                 self.grocery_list.remove(item)
 

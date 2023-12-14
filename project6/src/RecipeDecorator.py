@@ -1,5 +1,3 @@
-from Recipe import Recipe
-
 class RecipeDecorator:
     def __init__(self, recipe):
         self.recipe = recipe

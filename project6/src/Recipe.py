@@ -1,10 +1,3 @@
-
-import os
-import json
-
-
-recipeList = []
-
 class Recipe:
     def __init__(self, title, category, ingredients, instructions):
         self.title = title
@@ -90,7 +83,6 @@ class Recipe:
             continue_to_edit = input("Would you like to continue to edit this recipe? (yes/no): ").lower()
             if continue_to_edit == 'no' or 'n':
                 loop = False
-
         return self
 
 
@@ -103,4 +95,3 @@ class Instructions:
 class Ingredient:
     def __init__(self, name):
         self.name = name
-

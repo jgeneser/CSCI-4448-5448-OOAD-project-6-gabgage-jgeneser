@@ -1,7 +1,5 @@
 # GameEngine.py
-
 from Driver import Driver
-from User import User
 from RecipeOrganizer import RecipeOrganizer
 # This function imports all of the users from the stored_info.json file and makes them all users
 

@@ -1,9 +1,4 @@
-from Recipe import Recipe
-import os  
-import json 
-
 oragnizer_recipes = []
-
 class RecipeOrganizer:
     instance = None
     recipes = []
